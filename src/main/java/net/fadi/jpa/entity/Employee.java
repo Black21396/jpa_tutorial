@@ -1,5 +1,6 @@
 package net.fadi.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,8 +19,9 @@ public class Employee {
     private long id;
     private String name;
     private double salary;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonManagedReference()
     private Department department;
     @OneToOne
     @JoinColumn(name = "user_id")
