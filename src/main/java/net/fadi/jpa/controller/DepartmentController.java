@@ -1,6 +1,7 @@
 package net.fadi.jpa.controller;
 
 
+import jakarta.validation.Valid;
 import net.fadi.jpa.entity.Department;
 import net.fadi.jpa.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,12 @@ public class DepartmentController {
     }
 
     @PostMapping
-    public Department addDepartment(@RequestBody Department department){
+    public Department addDepartment(@RequestBody @Valid Department department){
         return departmentService.insertDepartment(department);
     }
 
     @PutMapping("/{id}")
-    public Department editDepartment(@PathVariable long id,@RequestBody Department department){
+    public Department editDepartment(@PathVariable long id,@RequestBody @Valid Department department){
         return  departmentService.updateDepartment(id, department);
     }
 
