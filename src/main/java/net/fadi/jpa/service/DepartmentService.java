@@ -2,6 +2,7 @@ package net.fadi.jpa.service;
 
 
 import net.fadi.jpa.entity.Department;
+import net.fadi.jpa.exception.CustomNotFoundException;
 import net.fadi.jpa.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,10 @@ public class DepartmentService {
     }
 
     public Department getDepartment(long id){
-        return departmentRepository.findById(id).get();
+
+        return departmentRepository.findById(id).orElseThrow( ()->{
+            return new CustomNotFoundException("This department with id: "+id+" is not found!");
+        } );
     }
     public Department insertDepartment(Department department){
         return departmentRepository.save(department);
